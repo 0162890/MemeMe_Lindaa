@@ -12,7 +12,16 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var memes = [Meme]()
+    
+    //저장할 미미 구조체
+    struct Meme{
+        var topText:String!
+        var bottomText:String!
+        var originalImage:UIImage!
+        var memedImage:UIImage!
+    }
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

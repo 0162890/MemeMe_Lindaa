@@ -26,13 +26,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         NSStrokeWidthAttributeName: 3.0]
     
     
-    //저장할 미미 구조체
-    struct Meme{
-        var topText:String!
-        var bottomText:String!
-        var originalImage:UIImage!
-        var memedImage:UIImage!
-    }
+    var editImage : UIImage?
+    var editTopText : UITextField?
+    var editBottomText : UITextField?
     
     var naviRightButton : UIBarButtonItem!
     var naviLeftButton : UIBarButtonItem!
@@ -62,9 +58,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         bottomTextField.superview?.bringSubview(toFront: bottomTextField)
 
         
+        
         //Nagivation bar에 버튼 추가
         naviLeftButton =  UIBarButtonItem(title: "Share", style: UIBarButtonItemStyle.plain, target: self, action:  #selector(ViewController.shareImage))
-        naviRightButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.plain, target: self, action: nil)
+        
+        naviRightButton = UIBarButtonItem(title: "Test", style: UIBarButtonItemStyle.plain, target: self, action: #selector(ViewController.moveSavedMeme))
         navigationItem.leftBarButtonItem = naviLeftButton
         navigationItem.rightBarButtonItem = naviRightButton
         
@@ -72,6 +70,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         naviLeftButton.isEnabled = false
        
         
+    }
+    
+    //tab bar view controller와 연결
+    func moveSavedMeme(){
+        let storyboard = UIStoryboard (name: "Main", bundle: nil)
+        
+        let tabVC = storyboard.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
+        
+        
+        self.present(tabVC, animated: true, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -147,6 +155,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         view.drawHierarchy(in: self.view.frame, afterScreenUpdates: false)
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
+        
         
         // Show toolbar and navbar
         self.navigationController?.isNavigationBarHidden = false

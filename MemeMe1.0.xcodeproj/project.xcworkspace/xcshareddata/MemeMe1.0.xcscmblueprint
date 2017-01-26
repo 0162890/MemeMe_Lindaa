@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "9502A94C6F3D963FDD1D5E6370FAF0DBCDB4D758",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "9502A94C6F3D963FDD1D5E6370FAF0DBCDB4D758" : 9223372036854775807,
+    "6989F8640D392A22A35563BA4E9065882F3065C5" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "995C31B0-388D-4174-88AC-9B73A9E3B35F",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "9502A94C6F3D963FDD1D5E6370FAF0DBCDB4D758" : "MemeMe_Linda\/",
+    "6989F8640D392A22A35563BA4E9065882F3065C5" : ".."
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "MemeMe1.0",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "MemeMe1.0.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/0162890\/BoostCamp_iOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6989F8640D392A22A35563BA4E9065882F3065C5"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/BoostCamp\/MemeMe_Linda.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9502A94C6F3D963FDD1D5E6370FAF0DBCDB4D758"
+    }
+  ]
+}

@@ -12,55 +12,84 @@ import UIKit
 class MemeTableViewController: UITableViewController{
     
     
-    
+    //MARK: - Connect to AppDelegate for shared model
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var memes = [Meme]()
     
-    //appDelegate에 있는 memes와 연결
-    override func viewWillAppear(_ animated: Bool) {
-        memes = appDelegate.memes
+ 
+    //MARK: - Life cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.title = "Sent Memes"
+        
     }
     
-    // MARK: Table View Data Source
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //Connect to shared model
+        memes = appDelegate.memes
+        
+        //Reload table view data
+        self.tableView.reloadData()
+    }
+
+    // MARK: - Move to Make Meme
+    @IBAction func moveMakeMeme(_ sender: Any) {
+        let memesVC = self.storyboard?.instantiateViewController(withIdentifier: "MakeMemeViewController") as! MakeMemeViewController
+        
+        //Connect memeVC with navigation view controller as rootView so that navigation bar can be seen
+        let navController = UINavigationController(rootViewController: memesVC)
+        self.present(navController, animated: true, completion: nil)
+    }
     
+    // MARK: - Table View Data Source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.memes.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell")!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MemeTableViewCell", for: indexPath) as! MemeTableViewCell
         
         let memesData = self.memes[indexPath.row]
         
-        // Set the name and image
+        //Set the text and image
         let topBottomText = "\(memesData.topText!)...\(memesData.bottomText!)"
-        cell.textLabel?.text = topBottomText
-        cell.textLabel?.textAlignment = .center
         
-        //이미지 사이즈 정해서 올릴 때 쓰는 방법
-//        let cellImg : UIImageView = UIImageView(frame: CGRect.init(x: 5, y: 5, width: 80, height: 80))
-//        cellImg.image = UIImage(named: "memesData.memedImage")
-//        cell.addSubview(cellImg)
-        
-        cell.imageView?.image = memesData.memedImage
-        
-        
+        cell.tableCellLabel?.text = topBottomText
+        cell.tableCellImage?.image = memesData.originalImage
+        cell.topLabel?.text = memesData.topText
+        cell.bottomLabel?.text = memesData.bottomText
+
         return cell
     }
     
+    
+    // MARK:- Table View Delegate
+    //Move to Detail Meme
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let editController = self.storyboard?.instantiateViewController(withIdentifier: "makeMemeViewController") as! ViewController
+        let detailController = self.storyboard?.instantiateViewController(withIdentifier: "DetailMemeViewController") as! DetailMemeViewController
         
         let memesData = self.memes[indexPath.row]
         
+        detailController.memes = memesData
         
-        
-//        let detailController = self.storyboard!.instantiateViewController(withIdentifier: "VillainDetailViewController") as! VillainDetailViewController
-//        detailController.villain = self.allVillains[(indexPath as NSIndexPath).row]
-//        self.navigationController!.pushViewController(detailController, animated: true)
+        self.navigationController!.pushViewController(detailController, animated: true)
     }
+    
+    //Delete select row
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.delete{
+            memes.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            self.appDelegate.memes.remove(at: indexPath.row)
+            self.tableView.reloadData()
+        }
+    }
+ 
 
     
 }
